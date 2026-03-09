@@ -1,0 +1,5 @@
+{
+  "name": "Minimal E-Commerce",
+  "description": "A mobile-first minimal e-commerce website with Firebase Authentication and Realtime Database.",
+  "requestFramePermissions": []
+}

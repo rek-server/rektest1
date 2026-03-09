@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal E-Commerce</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="#" class="logo">Store</a>
+        </div>
+        
+        <button id="mobile-menu-btn" class="mobile-menu-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+
+        <div class="nav-right" id="nav-menu">
+            <div class="search-container">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="nav-search" class="search-bar" placeholder="Search...">
+            </div>
+            
+            <a href="#notifications" id="nav-notifications" class="icon-btn" title="Notifications">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                <span class="icon-text mobile-only">Notifications</span>
+            </a>
+            
+            <a href="#cart" id="nav-cart" class="icon-btn" title="Cart">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <span class="icon-text mobile-only">Cart</span>
+                <span id="cart-badge" class="badge" style="display: none;">0</span>
+            </a>
+            
+            <div class="profile-menu-container">
+                <a href="#" id="nav-profile" class="icon-btn" title="Profile">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <span class="icon-text mobile-only">Profile</span>
+                </a>
+                <div class="profile-dropdown hidden" id="profile-dropdown">
+                    <a href="#login" id="nav-login">Login</a>
+                    <a href="#profile" id="nav-profile-link" class="hidden">My Profile</a>
+                    <a href="#admin" id="nav-admin" class="hidden" style="color: var(--danger-color);">Admin</a>
+                    <a href="#" id="nav-logout" class="hidden">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="main-content">
+        <!-- Sections will be toggled via JS -->
+    </main>
+
+    <!-- Profile Template -->
+    <template id="tpl-profile">
+        <section class="profile-section">
+            <div class="profile-header">
+                <h2>My Profile</h2>
+            </div>
+            <div class="profile-content">
+                <div class="profile-info card">
+                    <h3>Account Details</h3>
+                    <div class="info-group">
+                        <label>Name:</label>
+                        <p id="profile-name">Loading...</p>
+                    </div>
+                    <div class="info-group">
+                        <label>Email:</label>
+                        <p id="profile-email">Loading...</p>
+                    </div>
+                    <div class="info-group">
+                        <label>Member Since:</label>
+                        <p id="profile-date">Loading...</p>
+                    </div>
+                </div>
+                
+                <div class="profile-orders card">
+                    <h3>Order History</h3>
+                    <div id="orders-list" class="orders-list">
+                        <div class="loading-spinner"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <div class="footer-section">
+                <h4>Shop</h4>
+                <a href="#home">Home</a>
+                <a href="#shop">Shop</a>
+                <a href="#categories">Categories</a>
+                <a href="#offers">Offers</a>
+            </div>
+            <div class="footer-section">
+                <h4>Account</h4>
+                <a href="#login">Login</a>
+                <a href="#register">Register</a>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <a href="#contact">Contact</a>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 YourStore. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Templates for Sections -->
+    <template id="tpl-home">
+        <section class="hero">
+            <h1>Minimal Store</h1>
+            <p>Discover premium products with a seamless experience.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="app.navigate('offers')">View Offers</button>
+                <button class="btn" onclick="app.navigate('shop')">Best Deals</button>
+                <button class="btn" onclick="app.navigate('categories')">Categories</button>
+            </div>
+        </section>
+
+        <section class="featured-offers">
+            <h2>Featured Offers</h2>
+            <div class="product-grid" id="featured-grid">
+                <!-- Products -->
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-shop">
+        <section class="shop-section">
+            <h2>All Products</h2>
+            <div class="shop-controls">
+                <select id="filter-category" onchange="app.applyFilters()">
+                    <option value="all">All Categories</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="fashion">Fashion</option>
+                    <option value="accessories">Accessories</option>
+                    <option value="home">Home Items</option>
+                </select>
+                <select id="sort-options" onchange="app.applyFilters()">
+                    <option value="default">Sort By</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="rating">Rating: High to Low</option>
+                </select>
+            </div>
+            <div class="product-grid" id="shop-grid">
+                <!-- Products -->
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-wishlist">
+        <section class="shop-section">
+            <h2>Your Wishlist</h2>
+            <div class="product-grid" id="wishlist-grid">
+                <!-- Products -->
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-categories">
+        <section class="categories-section">
+            <h2>Categories</h2>
+            <div class="category-grid">
+                <div class="category-card" onclick="app.navigate('shop')">Electronics</div>
+                <div class="category-card" onclick="app.navigate('shop')">Fashion</div>
+                <div class="category-card" onclick="app.navigate('shop')">Accessories</div>
+                <div class="category-card" onclick="app.navigate('shop')">Mobile Gadgets</div>
+                <div class="category-card" onclick="app.navigate('shop')">Home Items</div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-offers">
+        <section class="shop-section">
+            <h2>Special Offers</h2>
+            <div class="product-grid" id="offers-grid">
+                <!-- Products -->
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-cart">
+        <section class="cart-section">
+            <h2>Your Cart</h2>
+            <div id="cart-items">
+                <!-- Cart Items -->
+            </div>
+            <div class="cart-summary">
+                <h3>Total: <span id="cart-total">৳ 0</span></h3>
+                <button class="btn btn-primary" id="checkout-btn" onclick="app.checkout()">Checkout</button>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-login">
+        <section class="auth-section">
+            <h2>Welcome Back</h2>
+            <p style="margin-bottom: 15px; color: #64748b;">Sign in to continue to your account.</p>
+            <form id="login-form">
+                <input type="email" id="login-email" placeholder="Email Address" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <div style="text-align: right; margin-bottom: 15px;">
+                    <a href="#forgot-password" style="color: var(--accent-color); font-size: 0.9em;">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <div class="divider"><span>OR</span></div>
+            <button class="btn btn-google" id="btn-google-login">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="google-icon">
+                Continue with Google
+            </button>
+            <button class="btn btn-text" onclick="app.navigate('register')" style="margin-top: 15px;">Don't have an account? Signup</button>
+        </section>
+    </template>
+
+    <template id="tpl-register">
+        <section class="auth-section">
+            <h2>Create Account</h2>
+            <p style="margin-bottom: 15px; color: #64748b;">Join us to get the best deals.</p>
+            <form id="register-form">
+                <input type="text" id="reg-name" placeholder="Full Name" required>
+                <input type="email" id="reg-email" placeholder="Email Address" required>
+                <input type="password" id="reg-password" placeholder="Password (min 6 chars)" required minlength="6">
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </form>
+            <div class="divider"><span>OR</span></div>
+            <button class="btn btn-google" id="btn-google-register">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="google-icon">
+                Signup with Google
+            </button>
+            <button class="btn btn-text" onclick="app.navigate('login')" style="margin-top: 15px;">Already have an account? Login</button>
+        </section>
+    </template>
+
+    <template id="tpl-forgot-password">
+        <section class="auth-section">
+            <h2>Reset Password</h2>
+            <p style="margin-bottom: 15px; color: #64748b;">Enter your email to receive a password reset link.</p>
+            <form id="forgot-password-form">
+                <input type="email" id="reset-email" placeholder="Email Address" required>
+                <button type="submit" class="btn btn-primary">Send Reset Link</button>
+            </form>
+            <button class="btn btn-text" onclick="app.navigate('login')" style="margin-top: 15px;">&larr; Back to Login</button>
+        </section>
+    </template>
+
+    <template id="tpl-contact">
+        <section class="auth-section">
+            <h2>Contact Us</h2>
+            <p>Email: support@yourstore.com</p>
+            <p>Phone: +1 234 567 890</p>
+        </section>
+    </template>
+
+    <template id="tpl-admin">
+        <section class="shop-section">
+            <h2 style="color: var(--danger-color);">Admin Dashboard</h2>
+            <div class="admin-panel" style="text-align: center; margin-top: 20px;">
+                <p style="font-size: 1.2em; margin-bottom: 20px;">Welcome, Admin! Manage your store here.</p>
+                <div class="category-grid">
+                    <div class="category-card" style="border-color: var(--danger-color); cursor: pointer;" onclick="app.navigate('admin-products')">Manage Products</div>
+                    <div class="category-card" style="border-color: var(--danger-color); cursor: pointer;" onclick="app.navigate('admin-orders')">View Orders</div>
+                    <div class="category-card" style="border-color: var(--danger-color); cursor: pointer;" onclick="app.navigate('admin-users')">Manage Users</div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-admin-products">
+        <section class="shop-section">
+            <h2 style="color: var(--danger-color);">Manage Products</h2>
+            <button class="btn btn-text" onclick="app.navigate('admin')">&larr; Back to Dashboard</button>
+            <div style="margin-top: 20px; text-align: center; color: #64748b;">
+                <p>Product management interface will be implemented here.</p>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-admin-orders">
+        <section class="shop-section">
+            <h2 style="color: var(--danger-color);">View Orders</h2>
+            <button class="btn btn-text" onclick="app.navigate('admin')">&larr; Back to Dashboard</button>
+            <div style="margin-top: 20px; text-align: center; color: #64748b;">
+                <p>Order viewing interface will be implemented here.</p>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-admin-users">
+        <section class="shop-section">
+            <h2 style="color: var(--danger-color);">Manage Users</h2>
+            <button class="btn btn-text" onclick="app.navigate('admin')">&larr; Back to Dashboard</button>
+            <div style="margin-top: 20px; text-align: center; color: #64748b;">
+                <p>User management interface will be implemented here.</p>
+            </div>
+        </section>
+    </template>
+
+    <!-- Notification Sound -->
+    <audio id="notification-sound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" preload="auto"></audio>
+
+    <!-- Product Details Modal -->
+    <div id="product-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal" onclick="app.closeProductModal()">&times;</span>
+            <div id="modal-product-details"></div>
+        </div>
+    </div>
+
+    <script type="module" src="/js/app.js"></script>
+</body>
+</html>
